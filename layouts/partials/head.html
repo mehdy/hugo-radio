@@ -1,0 +1,30 @@
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {{ with $.Param "author" }}
+    <meta name="author" content="{{ . }}">
+    {{ end }}
+    {{ with $.Param "contact" }}
+    <meta name="contact" content="{{ . }}">
+    {{ end }}
+    <meta property="og:site_name" content="{{ .Site.Title }}">
+    <meta property="og:title" content="{{ .Title }}">
+    <meta property="og:url" content="{{ .Permalink }}">
+    <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+    <meta name="description"
+        content="{{ with (.Description | default (replaceRE "\n" " " (.Summary | truncate 170))) }}{{ . }}{{ end }}">
+    <meta name="created" content="{{ .Date.Format "2006-01-02T15:04:05-0700" }}">
+    <meta name="modified" content="{{ .Lastmod.Format "2006-01-02T15:04:05-0700" }}">
+    <meta name="description" content="" />
+
+    <title>{{ if not .IsHome }}{{ .Title }} | {{ end }}{{ site.Title }}</title>
+
+    {{ if eq site.Params.LangDir "rtl" }}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation-rtl.min.css"
+        integrity="sha256-jvk46bzgetf2fy3FF19toDOoy9CG3aFqZfd229doSyo=" crossorigin="anonymous">
+    {{ else }}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation.min.css"
+        integrity="sha256-xpOKVlYXzQ3P03j397+jWFZLMBXLES3IiryeClgU5og=" crossorigin="anonymous">
+    {{ end }}
+</head>
