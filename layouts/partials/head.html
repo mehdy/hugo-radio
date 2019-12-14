@@ -16,7 +16,9 @@
         content="{{ with (.Description | default (replaceRE "\n" " " (.Summary | truncate 170))) }}{{ . }}{{ end }}">
     <meta name="created" content="{{ .Date.Format "2006-01-02T15:04:05-0700" }}">
     <meta name="modified" content="{{ .Lastmod.Format "2006-01-02T15:04:05-0700" }}">
-    <meta name="description" content="" />
+    <link rel="canonical" href="{{ .Permalink }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ "favicon-32x32.png" | relURL }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ "favicon-16x16.png" | relURL }}">
 
     <title>{{ if not .IsHome }}{{ .Title }} | {{ end }}{{ site.Title }}</title>
 
