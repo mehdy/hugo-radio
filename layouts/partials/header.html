@@ -1,1 +1,28 @@
-
+<div class="ui massive stackable borderless menu">
+    <div class="header item">
+        <div class="ui tiny rounded left floated image">
+            <img src="{{ site.Params.logo }}">
+        </div>
+        {{ .Site.Title }}
+    </div>
+    {{ $currentPage := . }}
+    {{ range .Site.Menus.main }}
+    {{ if .HasChildren }}
+    <div class="ui simple dropdown {{ if $currentPage.HasMenuCurrent "main" . }}active{{ end }} item">
+        {{ .Pre }}{{ .Name }}{{ .Post }}
+        <i class="dropdown icon"></i>
+        <div class="menu">
+            {{ range .Children }}
+            <a class="{{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }} item" href="{{ .URL }}">
+                {{ .Pre }}{{ .Name }}{{ .Post }}
+            </a>
+            {{ end }}
+        </div>
+    </div>
+    {{ else }}
+    <a class="{{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }} item" href="{{ .URL }}">
+        {{ .Pre }}{{ .Name }}{{ .Post }}
+    </a>
+    {{ end }}
+    {{ end }}
+</div>
